@@ -8,8 +8,8 @@ Route::get('/', function () {
     return redirect(route('products.index')); 
 });
 
-Auth::routes();
-
+//Auth::routes();
+Route::get('/login', \App\Livewire\LoginComponent::class)->name('login');
 Route::middleware('auth')->group(function () {
     Route::get('/products', function () {
         return view('products.index');

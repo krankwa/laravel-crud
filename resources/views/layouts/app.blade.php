@@ -7,9 +7,11 @@
  <title>Simple Laravel 11 CRUD Application Tutorial</title>
  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
  <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/bootstrapicons@1.11.1/font/bootstrap-icons.css">
+ @livewireStyles
 </head>
 
 <body> 
+@yield('content')
  <div class="container">
 <h3 class=" mt-3">Simple Laravel 11 CRUD Application Tutorial</h3>
 @yield('content')
@@ -23,7 +25,7 @@
 <script 
 src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bu
 ndle.min.js">
-
+@livewireScripts
 </script> 
 </body> 
 </html>
