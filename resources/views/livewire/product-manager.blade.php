@@ -10,12 +10,10 @@
             <div class="card-header">
                 <div class="float-start">Product List</div>
                 <div class="float-end">
-                    <form action="{{ route('logout') }}" method="post" class="d-inline">
-                        @csrf
-                        <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to logout?');">
-                            <i class="bi bi-box-arrow-right"></i> Logout
-                        </button>
-                    </form>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit">Logout</button>
+                </form>
                 </div>
             </div>
             <div class="card-body">
@@ -253,7 +251,7 @@
                 </form>
             </div>
         </div>
-    @elseif ($view === 'show')
+        @elseif ($view === 'show')
         <div class="card">
             <div class="card-header">
                 <div class="float-start">Product Details</div>
@@ -264,31 +262,32 @@
                 </div>
             </div>
             <div class="card-body">
+                @if ($selectedProduct)
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <strong>Code:</strong> {{ $product->code }}
+                            <strong>Code:</strong> {{ $selectedProduct->code }}
                         </div>
                         <div class="mb-3">
-                            <strong>Name:</strong> {{ $product->name }}
+                            <strong>Name:</strong> {{ $selectedProduct->name }}
                         </div>
                         <div class="mb-3">
-                            <strong>Price:</strong> ${{ number_format($product->price, 2) }}
+                            <strong>Price:</strong> ${{ number_format($selectedProduct->price, 2) }}
                         </div>
                         <div class="mb-3">
-                            <strong>Quantity:</strong> {{ $product->quantity }}
+                            <strong>Quantity:</strong> {{ $selectedProduct->quantity }}
                         </div>
                         <div class="mb-3">
                             <strong>Description:</strong> 
-                            <p>{{ $product->description ?: 'No description available' }}</p>
+                            <p>{{ $selectedProduct->description ?: 'No description available' }}</p>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="mb-3">
                             <strong>Image:</strong><br>
-                            @if($product->image)
-                                <img src="{{ asset('storage/' . $product->image) }}" 
-                                     alt="{{ $product->name }}" 
+                            @if($selectedProduct->image)
+                                <img src="{{ asset('storage/' . $selectedProduct->image) }}" 
+                                     alt="{{ $selectedProduct->name }}" 
                                      class="img-fluid border" 
                                      style="max-width: 300px; max-height: 300px;"
                                      onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
@@ -304,13 +303,16 @@
                     </div>
                 </div>
                 <div class="mt-4">
-                    <button wire:click="showEdit({{ $product->id }})" class="btn btn-warning">
+                    <button wire:click="showEdit({{ $selectedProduct->id }})" class="btn btn-warning">
                         <i class="bi bi-pencil-square"></i> Edit
                     </button>
                     <button wire:click="backToList" class="btn btn-secondary">
                         <i class="bi bi-list"></i> Back to List
                     </button>
                 </div>
+                @else
+                    <div class="alert alert-warning">No product selected.</div>
+                @endif
             </div>
         </div>
     @endif

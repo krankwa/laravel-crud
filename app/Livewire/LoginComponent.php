@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Livewire;
 
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 
 class LoginComponent extends Component
 {
@@ -19,7 +19,8 @@ class LoginComponent extends Component
 
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
             session()->regenerate();
-            $this->emit('userLoggedIn'); 
+            $this->reset(['email', 'password']);
+            return $this->redirect('/products');
         } else {
             $this->addError('email', 'Invalid credentials.');
         }

@@ -32,9 +32,11 @@ class ProductManager extends Component
 
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password])) {
             session()->regenerate();
-            session()->flash('success', 'Login successful.');
             $this->reset(['email', 'password']);
-            $this->view = 'list';
+            // Use redirect for SPA navigation (Livewire v3)
+            return $this->redirect('/products');
+            // Or, if you have a named route:
+            // return $this->redirectRoute('products.index');
         } else {
             $this->addError('email', 'Invalid credentials.');
         }

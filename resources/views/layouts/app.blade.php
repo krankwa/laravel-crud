@@ -15,11 +15,11 @@
 @yield('content')
 <div class="row justify-content-center text-center mt-3">
 <div class="col-md-12">
-<p>Return to Website: <a href="https://www.usjr.edu.ph/"><strong>University of San Jose - Recoletos</strong></a></p>
 </div>
 </div>
  </div>
-
+ <livewire:styles />
+ <livewire:scripts />
 <script 
 src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bu
 ndle.min.js">
